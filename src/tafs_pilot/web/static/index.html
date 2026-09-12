@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taf's Pilot — Autonomous Video Production Agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/console.css?v=2">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- ====================================================================
+         Header
+         ==================================================================== -->
+    <header class="app-header">
+      <div class="brand-section">
+        <div class="brand-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+        </div>
+        <div class="brand-title-group">
+          <h1>Taf's Pilot</h1>
+          <p>Autonomous Video Production Agent</p>
+        </div>
+      </div>
+
+      <div class="header-center-info">
+        <div class="project-id-badge">PROJECT / 74ed7661</div>
+        <div class="status-indicator">
+          <span class="status-dot"></span>
+          <span>Production Assistant • Ready</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="btn-jump-defect" class="btn-ghost" title="Fast-forward straight to autonomous QC defect & self-correction">
+          ⚡ Jump to QC Defect
+        </button>
+        <button id="btn-reset" class="btn-ghost">
+          ↺ Reset
+        </button>
+      </div>
+    </header>
+
+    <!-- ====================================================================
+         Main 3-Column Production Grid
+         ==================================================================== -->
+    <main class="main-console-grid">
+
+      <!-- COLUMN 1: YOUR BRIEF -->
+      <section class="console-column">
+        <div class="column-header">
+          <h2>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            Your Brief
+          </h2>
+        </div>
+        <div class="column-content">
+          <div id="brief-lock-notice" class="brief-lock-notice" style="display: none;">
+            🔒 Brief locked during production.
+          </div>
+
+          <div class="form-group">
+            <label for="brief-topic">Topic</label>
+            <input type="text" id="brief-topic" class="input-field" value="Why Senior Engineers Write Less Code Than Juniors">
+          </div>
+
+          <div class="form-group">
+            <label for="brief-audience">Audience</label>
+            <input type="text" id="brief-audience" class="input-field" value="Software engineers, tech leads, and developers">
+          </div>
+
+          <div class="form-group">
+            <label for="brief-goal">Goal</label>
+            <textarea id="brief-goal" class="textarea-field">Demonstrate that senior engineering impact comes from simplicity, code deletion, and preventing outages.</textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="brief-tone">Tone</label>
+            <input type="text" id="brief-tone" class="input-field" value="Direct, authoritative, punchy, insightful">
+          </div>
+
+          <div class="form-group">
+            <label for="brief-duration">Duration</label>
+            <input type="text" id="brief-duration" class="input-field" value="20–30 seconds">
+          </div>
+
+          <div class="form-group">
+            <label for="brief-platform">Platform</label>
+            <input type="text" id="brief-platform" class="input-field" value="YouTube Shorts / TikTok / Instagram Reels">
+          </div>
+
+          <button id="btn-start-production" class="btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            Start Production
+          </button>
+          <div class="helper-text">Taf's Pilot will turn your brief into a production plan.</div>
+        </div>
+      </section>
+
+      <!-- COLUMN 2: AGENT ACTIVITY & PRODUCTION TIMELINE -->
+      <section class="console-column">
+        <div class="column-header">
+          <h2>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            Agent Activity
+          </h2>
+          <span style="font-size: 11px; font-family: var(--font-mono); color: var(--text-dim);">LIFECYCLE V1</span>
+        </div>
+
+        <div class="column-content">
+          <!-- 7-Stage Production Timeline -->
+          <div class="stages-tracker" id="stages-tracker">
+            <div class="stage-node active" data-stage="UNDERSTAND">
+              <span class="stage-icon">●</span>
+              <span>01 UNDERSTAND</span>
+            </div>
+            <span class="stage-sep">›</span>
+            <div class="stage-node muted" data-stage="PLAN">
+              <span class="stage-icon">○</span>
+              <span>02 PLAN</span>
+            </div>
+            <span class="stage-sep">›</span>
+            <div class="stage-node muted" data-stage="ASK">
+              <span class="stage-icon">○</span>
+              <span>03 ASK</span>
+            </div>
+            <span class="stage-sep">›</span>
+            <div class="stage-node muted" data-stage="PRODUCE">
+              <span class="stage-icon">○</span>
+              <span>04 PRODUCE</span>
+            </div>
+            <span class="stage-sep">›</span>
+            <div class="stage-node muted" data-stage="INSPECT">
+              <span class="stage-icon">○</span>
+              <span>05 INSPECT</span>
+            </div>
+            <span class="stage-sep">›</span>
+            <div class="stage-node muted" data-stage="CORRECT">
+              <span class="stage-icon">○</span>
+              <span>06 CORRECT</span>
+            </div>
+            <span class="stage-sep">›</span>
+            <div class="stage-node muted" data-stage="DELIVER">
+              <span class="stage-icon">○</span>
+              <span>07 DELIVER</span>
+            </div>
+          </div>
+
+          <!-- Chronological Activity Timeline Feed -->
+          <div class="activity-feed" id="activity-feed">
+            <!-- Dynamically populated by app.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUMN 3: VIDEO PREVIEW & PRODUCTION STATUS -->
+      <section class="console-column">
+        <div class="column-header">
+          <h2>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+            Video Preview
+          </h2>
+          <span class="preview-format-tag">9:16 MASTER DELIVERABLE</span>
+        </div>
+
+        <div class="column-content preview-container">
+          <!-- 9:16 Vertical Video Frame -->
+          <div class="video-frame-outer" id="video-frame-outer">
+            <div class="video-phone-speaker"></div>
+            <!-- Badges -->
+            <div id="badge-latest" class="video-badge-latest" style="display: none;"><span class="badge-dot">●</span> Latest Cut</div>
+            <div id="badge-defect" class="video-badge-defect" style="display: none;">⚠ Defect (No Audio)</div>
+            <div id="badge-spec" class="video-badge-spec" style="display: none;">1080 × 1920</div>
+
+            <!-- Video Player -->
+            <video id="preview-video" class="video-element" controls playsinline loop style="display: none;"></video>
+
+            <!-- Placeholder State -->
+            <div id="video-placeholder" class="video-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="5" y="2" width="14" height="20" rx="2"></rect>
+                <polygon points="10 8 16 12 10 16 10 8" fill="currentColor"></polygon>
+              </svg>
+              <p>Your production will appear here.</p>
+            </div>
+
+            <!-- Rendering Scanline State -->
+            <div id="video-scanning" class="video-rendering-scan" style="display: none;">
+              <div class="scanline"></div>
+              <div class="spinner"></div>
+              <span style="font-size: 11px; font-family: var(--font-mono); color: var(--accent-cyan);">Rendering latest cut...</span>
+            </div>
+          </div>
+
+          <!-- Video Telemetry Details -->
+          <div id="telemetry-bar" class="telemetry-bar" style="display: none;">
+            <div class="telemetry-item">
+              <span class="telemetry-label">Runtime</span>
+              <span class="telemetry-val">18.1s</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">Resolution</span>
+              <span class="telemetry-val">1080×1920</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">Captions</span>
+              <span class="telemetry-val">Valid ✓</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">Audio</span>
+              <span class="telemetry-val">Stereo ✓</span>
+            </div>
+          </div>
+
+          <!-- Revision History Visual Trail -->
+          <div class="revision-history-card">
+            <div class="revision-title">Revision History</div>
+            <div id="revision-trail" class="revision-trail">
+              <span class="trail-step">Initial cut</span>
+              <span>→</span>
+              <span class="trail-step">Final cut</span>
+            </div>
+          </div>
+
+          <!-- Delivery Actions -->
+          <div id="delivery-actions" class="delivery-actions" style="display: none;">
+            <button id="btn-approve-video" class="btn-approve">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Approve Final Video
+            </button>
+            <button id="btn-view-report" class="btn-report">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              View Production Report
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Production Report Modal -->
+  <div id="report-modal" class="modal-backdrop">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3>Production & QC Audit Report</h3>
+        <button id="btn-close-modal" class="btn-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="font-size: 12px; color: var(--text-muted);">
+          Raw JSON audit telemetry from FFprobe quality inspection and agent autonomous revision decisions:
+        </div>
+        <pre id="report-code" class="modal-code-block"></pre>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/app.js?v=3"></script>
+</body>
+</html>
